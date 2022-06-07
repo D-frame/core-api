@@ -3,6 +3,7 @@ import express from 'express';
 import helmet from 'helmet';
 
 import {errorHandler, NotFoundError, currentUser, logRequest} from './common';
+import {authRouter} from './src/api/user';
 
 const app = express();
 app.use(express.urlencoded({extended: false}));
@@ -34,6 +35,7 @@ app.use('/healthcheck', (req, res) => {
 });
 app.use(logRequest);
 app.use(currentUser);
+app.use(authRouter);
 
 app.all('*', async () => {
 	throw new NotFoundError();

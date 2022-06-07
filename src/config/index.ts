@@ -33,6 +33,22 @@ if (nodeEnv === 'development') {
 		throw new Error('Development DB Password must be defined');
 	}
 
+	if (!process.env.MAGIC_SECRET_KEY) {
+		throw new Error('Magic Secret Key must be defined');
+	}
+
+	if (!process.env.MAGIC_PUBLISHABLE_KEY) {
+		throw new Error('Magic Publishable Keymust be defined');
+	}
+
+	if (!process.env.POLYGON_RPC_URL) {
+		throw new Error('Polygon RPC URL must be defined');
+	}
+
+	if (!process.env.POLYGON_CHAIN_ID) {
+		throw new Error('Polygon Chain ID must be defined');
+	}
+
 	/* Similarly can check for env variables */
 }
 

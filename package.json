@@ -7,6 +7,7 @@
 		"start": "NODE_ENV=development ts-node-dev ./index.ts"
 	},
 	"dependencies": {
+		"@magic-sdk/admin": "^1.4.1",
 		"dotenv": "^16.0.1",
 		"express": "^4.17.1",
 		"express-async-errors": "^3.1.1",
@@ -15,6 +16,8 @@
 		"jsonwebtoken": "^8.5.1",
 		"mongoose": "^5.12.12",
 		"morgan": "^1.10.0",
+		"passport": "^0.6.0",
+		"passport-magic": "^1.0.0",
 		"pm2": "^5.1.2",
 		"ts-node-dev": "^1.0.0-pre.44",
 		"typescript": "^3.8.3",
@@ -26,6 +29,7 @@
 		"@types/jsonwebtoken": "^8.3.8",
 		"@types/morgan": "^1.9.3",
 		"@types/node": "^15.6.1",
+		"@types/passport": "^1.0.8",
 		"@types/supertest": "^2.0.8",
 		"@typescript-eslint/eslint-plugin": "^4.33.0",
 		"@typescript-eslint/parser": "^4.33.0",
