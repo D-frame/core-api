@@ -4,12 +4,20 @@ interface UserAttrs {
 	firstName: string;
 	lastName: string;
 	isActive: boolean;
+	isEmailVerified: boolean;
+	email: string;
+	publicKey: string;
+	earnings: string;
 }
 
 interface UserDoc extends mongoose.Document {
 	firstName: string;
 	lastName: string;
 	isActive: boolean;
+	isEmailVerified: boolean;
+	email: string;
+	publicKey: string;
+	earnings: string;
 }
 
 interface UserModel extends mongoose.Model<UserDoc> {
@@ -19,7 +27,11 @@ const userSchema = new mongoose.Schema(
 	{
 		firstName: {type: String},
 		lastName: {type: String},
+		email: {type: String},
 		isActive: {type: Boolean, required: true},
+		isEmailVerified: {type: Boolean, default: false},
+		publickey: {type: String,required: true, unique: true},
+		earnings: {type: String, required: true},
 	},
 	{
 		timestamps: true,
