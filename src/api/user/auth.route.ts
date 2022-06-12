@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import express, {Request, Response} from 'express';
 import {body} from 'express-validator';
-import {Magic} from '@magic-sdk/admin';
+import {Magic, SDKError} from '@magic-sdk/admin';
 
 import {User} from '../../models/user.model';
 
@@ -43,22 +43,42 @@ router.get(
 		  Assumes DIDToken was passed in the Authorization header
 		  in the standard `Bearer {token}` format.
 		 */
+		const magic = new Magic(process.env.MAGIC_SECRET_KEY);
 		const DIDToken = req.headers.authorization.substring(7);
-		const metadata = await magic.users.getMetadataByToken(DIDToken);
-		const userInfo = User.where({publicAddress: metadata.publicAddress});
-		if(userInfo) {
-			res.send(userInfo)
-		} else {
-			let newUser = {
-				email: metadata.email,
-				publicAddress: metadata.publicAddress,
-				earnings: "0",
-				isActive: true,
-				isEmailVerified: true
-			};
-			let userNew = await User.create(newUser);
-			res.send(userNew);
-		}		
+		console.log(DIDToken)
+		console.log(process.env.MAGIC_SECRET_KEY)
+		try {
+			const metadata = await magic.users.getMetadataByToken(DIDToken);
+			console.log(metadata)
+			const userInfo = await User.where({publicAddress: metadata.publicAddress});
+			if(userInfo.length > 0) {
+				console.log("User exists")
+				res.send(userInfo)
+			} else {
+				console.log("Creating new user")
+				let newUser = {
+					email: metadata.email,
+					publickey: metadata.publicAddress,
+					earnings: "0",
+					isActive: true,
+					isEmailVerified: true
+				};
+				try {
+					let userNew = await User.create(newUser);
+					console.log(userNew)
+					res.send(userNew);
+				} catch(err) {
+					console.log(err)
+				}
+				
+			}		
+		} catch(err) {
+			if (err instanceof SDKError) {
+				console.log(err)
+			}
+		}
+		
+		
 	}
 );
 
