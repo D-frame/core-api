@@ -50,12 +50,13 @@ router.get(
 		try {
 			const metadata = await magic.users.getMetadataByToken(DIDToken);
 			console.log(metadata)
-			const userInfo = await User.where({publicAddress: metadata.publicAddress});
+			const userInfo = await User.where({publickey: metadata.publicAddress});
 			if(userInfo.length > 0) {
 				console.log("User exists")
 				res.send(userInfo)
 			} else {
 				console.log("Creating new user")
+				
 				let newUser = {
 					email: metadata.email,
 					publickey: metadata.publicAddress,
