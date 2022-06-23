@@ -48,6 +48,9 @@ if (nodeEnv === 'development') {
 	if (!process.env.POLYGON_CHAIN_ID) {
 		throw new Error('Polygon Chain ID must be defined');
 	}
+	if (!process.env.AES_GCM_KEY) {
+		throw new Error('AES GCM KEY  must be defined');
+	}
 
 	/* Similarly can check for env variables */
 }
@@ -55,6 +58,7 @@ if (nodeEnv === 'development') {
 const development = {
 	port: process.env.DEV_PORT,
 	databaseURI: `mongodb+srv://${process.env.MONGOOSE_URI_USERNAME}:${process.env.MONGOOSE_URI_PASSWORD}@${process.env.MONGO_URI}/${process.env.DEV_MONGOOSE_URI_DB}?retryWrites=true`,
+	aesGcmKey: process.env.AES_GCM_KEY,
 };
 
 const test = {

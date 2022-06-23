@@ -8,6 +8,7 @@
 	},
 	"dependencies": {
 		"@magic-sdk/admin": "^1.4.1",
+		"cryptr": "^6.0.3",
 		"dotenv": "^16.0.1",
 		"express": "^4.17.1",
 		"express-async-errors": "^3.1.1",
@@ -24,6 +25,7 @@
 		"winston": "^3.7.2"
 	},
 	"devDependencies": {
+		"@types/cryptr": "^4.0.1",
 		"@types/express": "^4.17.3",
 		"@types/helmet": "0.0.46",
 		"@types/jsonwebtoken": "^8.3.8",
