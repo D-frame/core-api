@@ -3,6 +3,8 @@ import express from 'express';
 import helmet from 'helmet';
 
 import {errorHandler, NotFoundError, currentUser, logRequest} from './common';
+import {authRouter} from './src/api/user';
+import {adminRouter} from './src/api/admin';
 
 const app = express();
 app.use(express.urlencoded({extended: false}));
@@ -25,7 +27,10 @@ app.use(
 );
 app.use((req, res, next) => {
 	res.setHeader('Access-Control-Allow-Origin', '*');
-	res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+	res.setHeader(
+		'Access-Control-Allow-Headers',
+		'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+	);
 	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
 	next();
 });
@@ -34,6 +39,8 @@ app.use('/healthcheck', (req, res) => {
 });
 app.use(logRequest);
 app.use(currentUser);
+app.use(authRouter);
+app.use(adminRouter);
 
 app.all('*', async () => {
 	throw new NotFoundError();
