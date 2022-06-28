@@ -8,7 +8,7 @@ const AES = new AESService();
 
 router.post(
 	'/api/admin/encrypt',
-	[body().isEmpty().withMessage('Please provide object to be encrypted')],
+	[body('data').isEmpty().withMessage('Please provide object to be encrypted')],
 	validateRequest,
 	async (req: Request, res: Response) => {
 		const dataToBeEncrypted = req.body;
