@@ -5,6 +5,7 @@ import helmet from 'helmet';
 import {errorHandler, NotFoundError, currentUser, logRequest} from './common';
 import {authRouter} from './src/api/user';
 import {adminRouter} from './src/api/admin';
+import { userRouter } from './src/api/user';
 
 const app = express();
 app.use(express.urlencoded({extended: false}));
@@ -41,6 +42,7 @@ app.use(logRequest);
 app.use(currentUser);
 app.use(authRouter);
 app.use(adminRouter);
+app.use(userRouter);
 
 app.all('*', async () => {
 	throw new NotFoundError();
