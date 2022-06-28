@@ -67,6 +67,8 @@ const test = {
 
 const production = {
 	port: process.env.DEV_PORT,
+	databaseURI: `mongodb+srv://${process.env.MONGOOSE_URI_USERNAME}:${process.env.MONGOOSE_URI_PASSWORD}@${process.env.MONGO_URI}/${process.env.DEV_MONGOOSE_URI_DB}?retryWrites=true`,
+	aesGcmKey: process.env.AES_GCM_KEY,
 };
 
 const config: any = {
