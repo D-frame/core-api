@@ -1,8 +1,11 @@
 import express, {Request, Response} from 'express';
 import {User} from '../../models/user.model';
+import { User_data } from '../../models/user-data.model';
+
 
 const router = express.Router();
 import {Magic, SDKError} from '@magic-sdk/admin';
+
 
 router.get('/api/user/update-email', async (req: Request, res: Response) => {
     let email = req.query.email
@@ -23,5 +26,13 @@ router.get('/api/user/update-email', async (req: Request, res: Response) => {
         res.status(404).send("User not found")
     }
 });
+
+router.post('/api/user/data', async (req: Request, res: Response) => {
+    let data = req.body;
+	console.log(req.body)
+	let mongoData = await User_data.create(data) 
+	console.log(mongoData)
+    res.send({data: mongoData})
+})
 
 export{router as userRouter}
