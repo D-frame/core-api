@@ -4,7 +4,8 @@
 	"description": "DFrame",
 	"main": "index.js",
 	"scripts": {
-		"start": "NODE_ENV=development ts-node-dev ./index.ts"
+		"start": "ts-node-dev ./index.ts",
+		"build": ""
 	},
 	"dependencies": {
 		"@magic-sdk/admin": "^1.4.1",
